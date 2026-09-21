@@ -13,6 +13,7 @@ $parameter  = $segment[2] ?? null;
 
 $controllerName = ucfirst($controller);
 $controllerFile = 'controller/' . $controllerName . '.php';
+
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
     $objController = new $controllerName();
