@@ -1,6 +1,6 @@
 <?php
 //require_once 'model/Latihan1Model.php';
-class Latihan1Controller
+class Latihan1Controller extends Controller
 {
     public function index()
     {
