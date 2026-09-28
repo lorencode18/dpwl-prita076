@@ -4,8 +4,7 @@ class Latihan1Controller
 {
     public function index()
     {
-        $model = new Latihan1Model();
-        $datamhs = $model->getAllMhs();
-        require './view/latihan1view.php';
+        $data['datamhs'] = $this->load->model('Latihan1Model')->getAllMhs();
+        $this->load->view('latihan1view', $data);
     }
 }
