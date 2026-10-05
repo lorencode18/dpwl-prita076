@@ -4,20 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Mahasiswa</title>
-     <style>
-        table {
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 1px 4px;
-            text-align: left;
-        }
-    </style>
 </head>
 <body>
     <h2>Daftar Mahasiswa</h2>
-    <table>
+    <table border="1" cellpadding="5" cellspacing="0">
          <tr>
             <th>NO.</th>
             <th>NIM</th>
@@ -38,6 +28,6 @@
         }
         ?>
     </table>
-     Admin, <?= htmlspecialchars($nama_user) ?>
+    Admin, <?= htmlspecialchars($nama_user) ?>
 </body>
 </html>
