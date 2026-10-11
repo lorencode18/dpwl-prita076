@@ -11,8 +11,8 @@ class Login_C extends Controller
         $email = $_POST['email'];
         $password = $_POST['pass'];
         $cekdata = $this->load->model('Login_M');
-        $datauser = $cekdata->ambildata($email, $password);
-        if ($datauser) {
+        $datauser = $cekdata->ambildata($email);
+        if ($datauser && password_verify($password, $datauser['password'])) {
             $this->session->set_userdata('emailuser', $email);
             echo '<script>alert("Login berhasil sebagai ' . $this->session->userdata('emailuser') . '");</script>';
         } else {
