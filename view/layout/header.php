@@ -17,6 +17,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="./AdminLTE-3.2.0/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
+    <?php
+    if (!empty($info_psn)) {
+        echo "<script>alert('" . $info_psn . "');</script>";
+    }
+    ?>
 <div class="wrapper">
 
   <!-- Navbar -->
