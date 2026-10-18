@@ -16,7 +16,7 @@ class Mobil_C extends Controller
         $info['nm_user'] = explode('@', $this->session->userdata('emailuser'))[0];
         $this->load->view('layout/header');
         $this->load->view('layout/sidebar');
-        $this->load->view('v_master/mobilview', $dt);
+        $this->load->view('v_master/mobilview');
         $this->load->view('layout/footer');
     }
 }
