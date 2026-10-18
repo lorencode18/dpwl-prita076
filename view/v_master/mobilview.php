@@ -50,7 +50,7 @@
                                 <td><?=  $m['nbagasi'] ?></td>
                                 <td><?=  $m['jns_mobil'] ?></td>
                                 <td><?=  $m['thn_buat'] ?></td>
-                                <td><?=  $m['ft_depan'] . '<br>' . $m['ft_blkg'] . $m['ft_interior'] ?></td>
+                                <td><?=  $m['ft_depan'] . '<br>' . $m['ft_blkg'] . '<br>' . $m['ft_interior'] ?></td>
                                 <td><?=  $m['hrg_hari'] ?></td>
                                 <td><?=  $m['cttn_unit'] ?></td>
                                 <td><?=  $m['status_unit'] ?></td>
