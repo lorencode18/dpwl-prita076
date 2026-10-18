@@ -142,6 +142,8 @@
                                         <option value="">-- Pilih Status --</option>
                                         <option value="Aktif">Aktif</option>
                                         <option value="Tidak Aktif">Tidak Aktif</option>
+                                        <option value="Tersedia">Tersedia</option>
+                                        <option value="Tidak Tersedia">Tidak Tersedia</option>
                                     </select>
                                 </div>
                             </div>
