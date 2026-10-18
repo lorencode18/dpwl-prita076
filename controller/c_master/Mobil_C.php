@@ -5,7 +5,7 @@ class Mobil_C extends Controller
     {
         $this->load->view('layout/header');
         $this->load->view('layout/sidebar');
-        $this->load->view('layout/mobilview');
+        $this->load->view('v_master/mobilview');
         $this->load->view('layout/footer');
     }
 }
