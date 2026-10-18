@@ -25,6 +25,10 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
+                <a href="<?= base_url('Mobil_C/create_mobil') ?>" class="btn btn-primary">
+                    <i class="fas fa-car"></i>
+                    Tambah Data Mobil
+                </a>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
