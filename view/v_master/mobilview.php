@@ -42,6 +42,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($dtmobil as $m) : ?>
+                            <tr>
+                                <td><?=  $m['no_plat'] ?></td>
+                                <td><?=  $m['nm_mobil'] ?></td>
+                                <td><?=  $m['nkursi'] ?></td>
+                                <td><?=  $m['nbagasi'] ?></td>
+                                <td><?=  $m['jns_mobil'] ?></td>
+                                <td><?=  $m['thn_buat'] ?></td>
+                                <td><?=  $m['ft_depan'] . '<br>' . $m['ft_blkg'] . $m['ft_interior'] ?></td>
+                                <td><?=  $m['hrg_hari'] ?></td>
+                                <td><?=  $m['cttn_unit'] ?></td>
+                                <td><?=  $m['status_unit'] ?></td>
+                                <td>
+                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                         <!-- Data mobil -->
                     </tbody>
                 </table>
