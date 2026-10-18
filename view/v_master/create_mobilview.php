@@ -86,6 +86,7 @@
                                             class="form-control" required>
                                         <option value="">-- Pilih Jenis --</option>
                                         <option value="Kijang">Kijang</option>
+                                        <option value="Minibus">Minibus</option>
                                         <option value="MPV">MPV</option>
                                         <option value="SUV">SUV</option>
                                         <option value="Sedan">Sedan</option>
