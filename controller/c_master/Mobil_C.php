@@ -37,18 +37,37 @@ class Mobil_C extends Controller
         $ft_interior = 'Interior' . $this->load->post('no_plat');
 
         
-        $folder = dirname(__DIR__, 2) . '/img/';
-        if (isset($_FILES['ft_depan']) && $_FILES['ft_depan']['error'] == 0) {
-            $file = $_FILES['ft_depan'];
-            $info = getimagesize($file['tmp_name']);
-            $ext = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/jpg' => 'jpg'];
+        $nmgambar = $_FILES['ft_depan']['tmp_name'];
+        $ekstensi = explode(".", $_FILES['ft_depan']['name']);
+        $ekstensi = end($ekstensi);
+        $ft_depan = $ft_depan . $ekstensi;
+        $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_depan;
+        if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
+            echo "<script>alert('Gagal simpan gambar depan, format jpg, png dan jpeg...');</script>";
+        } else {
+            move_uploaded_file($nmgambar, $target_dir);
+        }
 
-            if ($info && isset($ext[$info['mime']]) && $file['size'] <= 2 * 1024 * 1024) {
-                $namafiledepan = $ft_depan . '.' . $ext[$info['mime']];
-                move_uploaded_file($file['tmp_name'], $folder . $namafiledepan);
-            } else {
-                echo "<script>alert('Gagal simpan gambar, cek ukuran dan format..!');</script>";
-            }
+        $nmgambar = $_FILES['ft_blkg']['tmp_name'];
+        $ekstensi = explode(".", $_FILES['ft_blkg']['name']);
+        $ekstensi = end($ekstensi);
+        $ft_blkg = $ft_depan . $ekstensi;
+        $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_blkg;
+        if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
+            echo "<script>alert('Gagal simpan gambar blkg, format jpg, png dan jpeg...');</script>";
+        } else {
+            move_uploaded_file($nmgambar, $target_dir);
+        }
+
+        $nmgambar = $_FILES['ft_interior']['tmp_name'];
+        $ekstensi = explode(".", $_FILES['ft_interior']['name']);
+        $ekstensi = end($ekstensi);
+        $ft_interior = $ft_interior . $ekstensi;
+        $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_interior;
+        if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
+            echo "<script>alert('Gagal simpan gambar interior, format jpg, png dan jpeg...');</script>";
+        } else {
+            move_uploaded_file($nmgambar, $target_dir);
         }
 
         $data = [
@@ -59,7 +78,7 @@ class Mobil_C extends Controller
             'jns_mobil' => $this->load->post('jns_mobil'),
             'transmisi' => $this->load->post('transmisi'),
             'thn_buat' => $this->load->post('thn_buat'),
-            'ft_depan' => $namafiledepan,
+            'ft_depan' => $ft_depan,
             'ft_blkg' => $ft_blkg,
             'ft_interior' => $ft_interior,
             'hrg_hari' => $this->load->post('hrg_hari'),
