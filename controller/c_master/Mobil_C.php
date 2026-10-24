@@ -40,7 +40,7 @@ class Mobil_C extends Controller
         $nmgambar = $_FILES['ft_depan']['tmp_name'];
         $ekstensi = explode(".", $_FILES['ft_depan']['name']);
         $ekstensi = end($ekstensi);
-        $ft_depan = $ft_depan . $ekstensi;
+        $ft_depan = $ft_depan . '.' . $ekstensi;
         $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_depan;
         if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
             echo "<script>alert('Gagal simpan gambar depan, format jpg, png dan jpeg...');</script>";
@@ -51,7 +51,7 @@ class Mobil_C extends Controller
         $nmgambar = $_FILES['ft_blkg']['tmp_name'];
         $ekstensi = explode(".", $_FILES['ft_blkg']['name']);
         $ekstensi = end($ekstensi);
-        $ft_blkg = $ft_blkg . $ekstensi;
+        $ft_blkg = $ft_blkg . '.' . $ekstensi;
         $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_blkg;
         if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
             echo "<script>alert('Gagal simpan gambar blkg, format jpg, png dan jpeg...');</script>";
@@ -62,7 +62,7 @@ class Mobil_C extends Controller
         $nmgambar = $_FILES['ft_interior']['tmp_name'];
         $ekstensi = explode(".", $_FILES['ft_interior']['name']);
         $ekstensi = end($ekstensi);
-        $ft_interior = $ft_interior . $ekstensi;
+        $ft_interior = $ft_interior . '.' . $ekstensi;
         $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_interior;
         if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
             echo "<script>alert('Gagal simpan gambar interior, format jpg, png dan jpeg...');</script>";
