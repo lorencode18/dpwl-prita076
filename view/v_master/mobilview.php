@@ -63,7 +63,7 @@
                                 <td><?=  $m['status_unit'] ?></td>
                                 <td>
                                     <a href="<?= base_url('Mobil_C/edit_mobil/' . urlencode($m['no_plat'])) ?>"
-                                       class="btn btn-warning">Edit</a>
+                                       class="btn btn-warning btn-sm">Edit</a>
                                     <a href="#" class="btn btn-danger btn-sm">Hapus</a>
                                 </td>
                             </tr>
