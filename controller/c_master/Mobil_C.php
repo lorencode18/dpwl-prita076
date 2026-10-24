@@ -109,13 +109,12 @@ class Mobil_C extends Controller
         )[0];
 
         $mobil = $this->load->model('m_master/Mobil_M');
-
         $dt['m'] = $mobil->detailmobil($no_plat);
 
         if (!$dt['m']) {
             echo "<script>
                 alert('Data mobil tidak ditemukan!');
-                window.location.href = '" . base_url('Mobil_C') . "';
+                window.location.href = '" . base_url('Mobil_C/index') . "';
             </script>";
             exit;
         }
@@ -125,76 +124,75 @@ class Mobil_C extends Controller
         $this->load->view('v_master/edit_mobilview', $dt);
         $this->load->view('layout/footer');
     }
+
     public function update()
     {
         $mobil = $this->load->model('m_master/Mobil_M');
+        $no_plat = $this->load->post('no_plat');
 
-        $no_plat = $this->input->post('no_plat');
+        $lama = $mobil->detailmobil($no_plat);
 
-        $mobil_lama = $mobil->detailmobil($no_plat);
-
-        if (!$mobil_lama) {
+        if (!$lama) {
             echo "<script>
                 alert('Data mobil tidak ditemukan!');
-                window.location.href = '" . base_url('Mobil_C') . "';
+                window.location.href = '" . base_url('Mobil_C/index') . "';
             </script>";
             exit;
         }
 
-        $ft_depan = $mobil_lama['ft_depan'];
-        $ft_blkg = $mobil_lama['ft_blkg'];
-        $ft_interior = $mobil_lama['ft_interior'];
+        $foto = [
+            'ft_depan' => $lama['ft_depan'],
+            'ft_blkg' => $lama['ft_blkg'],
+            'ft_interior' => $lama['ft_interior']
+        ];
 
-        $folder = FCPATH . 'img/';
+        $kolomFoto = [
+            'ft_depan' => 'Depan',
+            'ft_blkg' => 'Belakang',
+            'ft_interior' => 'Interior'
+        ];
 
-        if (
-            isset($_FILES['ft_depan']) &&
-            $_FILES['ft_depan']['error'] === UPLOAD_ERR_OK
-        ) {
-            $ft_depan = time() . '_depan_' . basename($_FILES['ft_depan']['name']);
+        foreach ($kolomFoto as $kolom => $awalan) {
+            if (
+                isset($_FILES[$kolom]) &&
+                $_FILES[$kolom]['error'] === UPLOAD_ERR_OK
+            ) {
+                $ekstensi = strtolower(
+                    pathinfo(
+                        $_FILES[$kolom]['name'],
+                        PATHINFO_EXTENSION
+                    )
+                );
 
-            if (!move_uploaded_file(
-                $_FILES['ft_depan']['tmp_name'],
-                $folder . $ft_depan
-            )) {
+                if (!in_array($ekstensi, ['jpg', 'jpeg', 'png'])) {
+                    echo "<script>
+                        alert('Format foto harus JPG, JPEG, atau PNG!');
+                        window.history.back();
+                    </script>";
+                    exit;
+                }
+
+                $namaFoto = $awalan . $no_plat . '.' . $ekstensi;
+                $target = dirname(__DIR__, 2) . '/img/' . $namaFoto;
+
+                if (move_uploaded_file(
+                    $_FILES[$kolom]['tmp_name'],
+                    $target
+                )) {
+                    $foto[$kolom] = $namaFoto;
+                } else {
+                    echo "<script>
+                        alert('Foto gagal diunggah!');
+                        window.history.back();
+                    </script>";
+                    exit;
+                }
+            } elseif (
+                isset($_FILES[$kolom]) &&
+                $_FILES[$kolom]['error'] !== UPLOAD_ERR_NO_FILE
+            ) {
                 echo "<script>
-                    alert('Gagal mengunggah foto depan!');
-                    window.history.back();
-                </script>";
-                exit;
-            }
-        }
-
-        if (
-            isset($_FILES['ft_blkg']) &&
-            $_FILES['ft_blkg']['error'] === UPLOAD_ERR_OK
-        ) {
-            $ft_blkg = time() . '_belakang_' . basename($_FILES['ft_blkg']['name']);
-
-            if (!move_uploaded_file(
-                $_FILES['ft_blkg']['tmp_name'],
-                $folder . $ft_blkg
-            )) {
-                echo "<script>
-                    alert('Gagal mengunggah foto belakang!');
-                    window.history.back();
-                </script>";
-                exit;
-            }
-        }
-
-        if (
-            isset($_FILES['ft_interior']) &&
-            $_FILES['ft_interior']['error'] === UPLOAD_ERR_OK
-        ) {
-            $ft_interior = time() . '_interior_' . basename($_FILES['ft_interior']['name']);
-
-            if (!move_uploaded_file(
-                $_FILES['ft_interior']['tmp_name'],
-                $folder . $ft_interior
-            )) {
-                echo "<script>
-                    alert('Gagal mengunggah foto interior!');
+                    alert('Terjadi kesalahan saat mengunggah foto!');
                     window.history.back();
                 </script>";
                 exit;
@@ -203,24 +201,24 @@ class Mobil_C extends Controller
 
         $data = [
             'no_plat' => $no_plat,
-            'nm_mobil' => $this->input->post('nm_mobil'),
-            'nkursi' => $this->input->post('nkursi'),
-            'nbagasi' => $this->input->post('nbagasi'),
-            'jns_mobil' => $this->input->post('jns_mobil'),
-            'transmisi' => $this->input->post('transmisi'),
-            'thn_buat' => $this->input->post('thn_buat'),
-            'ft_depan' => $ft_depan,
-            'ft_blkg' => $ft_blkg,
-            'ft_interior' => $ft_interior,
-            'hrg_hari' => $this->input->post('hrg_hari'),
-            'cttn_unit' => $this->input->post('cttn_unit'),
-            'status_unit' => $this->input->post('status_unit')
+            'nm_mobil' => $this->load->post('nm_mobil'),
+            'nkursi' => $this->load->post('nkursi'),
+            'nbagasi' => $this->load->post('nbagasi'),
+            'jns_mobil' => $this->load->post('jns_mobil'),
+            'transmisi' => $this->load->post('transmisi'),
+            'thn_buat' => $this->load->post('thn_buat'),
+            'ft_depan' => $foto['ft_depan'],
+            'ft_blkg' => $foto['ft_blkg'],
+            'ft_interior' => $foto['ft_interior'],
+            'hrg_hari' => $this->load->post('hrg_hari'),
+            'cttn_unit' => $this->load->post('cttn_unit'),
+            'status_unit' => $this->load->post('status_unit')
         ];
 
         if ($mobil->update($data)) {
             echo "<script>
                 alert('Data mobil berhasil diperbarui!');
-                window.location.href = '" . base_url('Mobil_C') . "';
+                window.location.href = '" . base_url('Mobil_C/index') . "';
             </script>";
         } else {
             echo "<script>
