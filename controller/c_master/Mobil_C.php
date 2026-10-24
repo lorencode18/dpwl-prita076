@@ -100,4 +100,29 @@ class Mobil_C extends Controller
             </script>";
         }
     }
+
+    public function edit_mobil($no_plat)
+    {
+        $info['nm_user'] = explode(
+            '@',
+            $this->session->userdata('emailuser')
+        )[0];
+
+        $mobil = $this->load->model('m_master/Mobil_M');
+
+        $dt['m'] = $mobil->detailmobil($no_plat);
+
+        if (!$dt['m']) {
+            echo "<script>
+                alert('Data mobil tidak ditemukan!');
+                window.location.href = '" . base_url('Mobil_C') . "';
+            </script>";
+            exit;
+        }
+
+        $this->load->view('layout/header');
+        $this->load->view('layout/sidebar', $info);
+        $this->load->view('v_master/edit_mobilview', $dt);
+        $this->load->view('layout/footer');
+    }
 }
