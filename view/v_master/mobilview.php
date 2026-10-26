@@ -64,10 +64,11 @@
                                 <td>
                                     <a href="<?= base_url('Mobil_C/edit_mobil/' . urlencode($m['no_plat'])) ?>"
                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="<?= base_url('Mobil_C/hapus/' . urlencode($m['no_plat'])) ?>"
+                                    <a href="<?= base_url('Mobil_C/hapus/' . $m['no_plat']) ?>"
                                        class="btn btn-danger btn-sm"
-                                       onclick="return confirm('Yakin ingin menghapus data mobil ini?')">
-                                       Hapus </a>
+                                       onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                       Hapus 
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
