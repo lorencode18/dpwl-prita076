@@ -227,4 +227,21 @@ class Mobil_C extends Controller
             </script>";
         }
     }
+
+    public function hapus($no_plat)
+    {
+        $mobil = $this->load->model('m_master/Mobil_M');
+
+        if ($mobil->hapus($no_plat)) {
+            echo "<script>
+                alert('Data mobil berhasil dihapus!');
+                window.location.href = '" . base_url('Mobil_C/index') . "';
+            </script>";
+        } else {
+            echo "<script>
+                alert('Data mobil gagal dihapus!');
+                window.location.href = '" . base_url('Mobil_C/index') . "';
+            </script>";
+        }
+    }
 }
