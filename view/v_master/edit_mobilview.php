@@ -95,6 +95,7 @@
                                         $jenisMobil = [
                                             'Kijang',
                                             'Minibus',
+                                            'Sport',
                                             'MPV',
                                             'SUV',
                                             'Sedan',
