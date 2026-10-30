@@ -45,7 +45,8 @@
                                     <label>No. Plat</label>
                                     <input type="text" name="no_plat"
                                            class="form-control"
-                                           value="<?= htmlspecialchars($m['no_plat'] ?? '') ?>"
+                                           placeholder="Contoh: BN 1234 AB"
+                                           value="<?= htmlspecialchars($mobil['no_plat']) ?>"
                                            readonly>
                                 </div>
                             </div>
@@ -56,7 +57,7 @@
                                     <input type="text" name="nm_mobil"
                                            class="form-control"
                                            placeholder="Contoh: Toyota Avanza"
-                                           value="<?= htmlspecialchars($m['nm_mobil'] ?? '') ?>"
+                                           value="<?= htmlspecialchars($mobil['nm_mobil']) ?>"
                                            required>
                                 </div>
                             </div>
@@ -69,7 +70,7 @@
                                     <input type="number" name="nkursi"
                                            class="form-control"
                                            min="1"
-                                           value="<?= htmlspecialchars($m['nkursi'] ?? '') ?>"
+                                           value="<?= $mobil['nkursi'] ?>"
                                            required>
                                 </div>
                             </div>
@@ -80,7 +81,7 @@
                                     <input type="number" name="nbagasi"
                                            class="form-control"
                                            min="0"
-                                           value="<?= htmlspecialchars($m['nbagasi'] ?? '') ?>"
+                                           value="<?= $mobil['nbagasi'] ?>"
                                            required>
                                 </div>
                             </div>
@@ -88,27 +89,15 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Jenis Mobil</label>
-                                    <select name="jns_mobil"
-                                            class="form-control" required>
+                                    <select name="jns_mobil" class="form-control" required>
                                         <option value="">-- Pilih Jenis --</option>
-                                        <?php
-                                        $jenisMobil = [
-                                            'Kijang',
-                                            'Minibus',
-                                            'Sport',
-                                            'MPV',
-                                            'SUV',
-                                            'Sedan',
-                                            'City Car'
-                                        ];
-
-                                        foreach ($jenisMobil as $jenis) {
-                                        ?>
-                                            <option value="<?= htmlspecialchars($jenis) ?>"
-                                                <?= ($m['jns_mobil'] ?? '') === $jenis ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($jenis) ?>
-                                            </option>
-                                        <?php } ?>
+                                        <option value="Kijang" <?= $mobil['jns_mobil'] == 'Kijang' ? 'selected' : '' ?>>Kijang</option>
+                                        <option value="Minibus" <?= $mobil['jns_mobil'] == 'Minibus' ? 'selected' : '' ?>>Minibus</option>
+                                        <option value="Sport" <?= $mobil['jns_mobil'] == 'Sport' ? 'selected' : '' ?>>Sport</option>
+                                        <option value="MPV" <?= $mobil['jns_mobil'] == 'MPV' ? 'selected' : '' ?>>MPV</option>
+                                        <option value="SUV" <?= $mobil['jns_mobil'] == 'SUV' ? 'selected' : '' ?>>SUV</option>
+                                        <option value="Sedan" <?= $mobil['jns_mobil'] == 'Sedan' ? 'selected' : '' ?>>Sedan</option>
+                                        <option value="City Car" <?= $mobil['jns_mobil'] == 'City Car' ? 'selected' : '' ?>>City Car</option>
                                     </select>
                                 </div>
                             </div>
@@ -116,17 +105,10 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Transmisi</label>
-                                    <select name="transmisi"
-                                            class="form-control" required>
+                                    <select name="transmisi" class="form-control" required>
                                         <option value="">-- Pilih Transmisi --</option>
-                                        <option value="Manual"
-                                            <?= ($m['transmisi'] ?? '') === 'Manual' ? 'selected' : '' ?>>
-                                            Manual
-                                        </option>
-                                        <option value="Automatic"
-                                            <?= ($m['transmisi'] ?? '') === 'Automatic' ? 'selected' : '' ?>>
-                                            Automatic
-                                        </option>
+                                        <option value="Manual" <?= $mobil['transmisi'] == 'Manual' ? 'selected' : '' ?>>Manual</option>
+                                        <option value="Automatic" <?= $mobil['transmisi'] == 'Automatic' ? 'selected' : '' ?>>Automatic</option>
                                     </select>
                                 </div>
                             </div>
@@ -140,7 +122,7 @@
                                            class="form-control"
                                            placeholder="Contoh: 2024"
                                            min="1900" max="2100"
-                                           value="<?= htmlspecialchars($m['thn_buat'] ?? '') ?>"
+                                           value="<?= $mobil['thn_buat'] ?>"
                                            required>
                                 </div>
                             </div>
@@ -156,7 +138,7 @@
                                                class="form-control"
                                                placeholder="Contoh: 350000"
                                                min="0" step="0.01"
-                                               value="<?= htmlspecialchars($m['hrg_hari'] ?? '') ?>"
+                                               value="<?= $mobil['hrg_hari'] ?>"
                                                required>
                                     </div>
                                 </div>
@@ -165,24 +147,12 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Status Unit</label>
-                                    <select name="status_unit"
-                                            class="form-control" required>
+                                    <select name="status_unit" class="form-control" required>
                                         <option value="">-- Pilih Status --</option>
-                                        <?php
-                                        $statusUnit = [
-                                            'Aktif',
-                                            'Tidak Aktif',
-                                            'Tersedia',
-                                            'Tidak Tersedia'
-                                        ];
-
-                                        foreach ($statusUnit as $status) {
-                                        ?>
-                                            <option value="<?= htmlspecialchars($status) ?>"
-                                                <?= ($m['status_unit'] ?? '') === $status ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($status) ?>
-                                            </option>
-                                        <?php } ?>
+                                        <option value="Aktif" <?= $mobil['status_unit'] == 'Aktif' ? 'selected' : '' ?>>Aktif</option>
+                                        <option value="Tidak Aktif" <?= $mobil['status_unit'] == 'Tidak Aktif' ? 'selected' : '' ?>>Tidak Aktif</option>
+                                        <option value="Tersedia" <?= $mobil['status_unit'] == 'Tersedia' ? 'selected' : '' ?>>Tersedia</option>
+                                        <option value="Tidak Tersedia" <?= $mobil['status_unit'] == 'Tidak Tersedia' ? 'selected' : '' ?>>Tidak Tersedia</option>
                                     </select>
                                 </div>
                             </div>
@@ -200,7 +170,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Foto Depan Saat Ini</label><br>
-                                    <img src="<?= base_url('img/' . rawurlencode($m['ft_depan'] ?? '')) ?>"
+                                    <img src="<?= base_url('img/' . rawurlencode($mobil['ft_depan'])) ?>"
                                          alt="Foto depan mobil"
                                          style="width:200px; height:130px; object-fit:contain;">
 
@@ -217,7 +187,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Foto Belakang Saat Ini</label><br>
-                                    <img src="<?= base_url('img/' . rawurlencode($m['ft_blkg'] ?? '')) ?>"
+                                    <img src="<?= base_url('img/' . rawurlencode($mobil['ft_blkg'])) ?>"
                                          alt="Foto belakang mobil"
                                          style="width:200px; height:130px; object-fit:contain;">
 
@@ -234,7 +204,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Foto Interior Saat Ini</label><br>
-                                    <img src="<?= base_url('img/' . rawurlencode($m['ft_interior'] ?? '')) ?>"
+                                    <img src="<?= base_url('img/' . rawurlencode($mobil['ft_interior'])) ?>"
                                          alt="Foto interior mobil"
                                          style="width:200px; height:130px; object-fit:contain;">
 
@@ -254,7 +224,7 @@
                             <textarea name="cttn_unit"
                                       class="form-control"
                                       rows="3"
-                                      placeholder="Masukkan catatan mengenai kendaraan"><?= htmlspecialchars($m['cttn_unit'] ?? '') ?></textarea>
+                                      placeholder="Masukkan catatan mengenai kendaraan"><?= htmlspecialchars($mobil['cttn_unit'] ?? '') ?></textarea>
                         </div>
                     </div>
 
