@@ -104,7 +104,7 @@ class Mobil_C extends Controller
     public function edit($no_plat)
     {
         $info['nm_user'] = explode('@', $this->session->userdata('emailuser'))[0];
-        $mobil = $this->load->model('Mobil_M');
+        $mobil = $this->load->model('m_master/Mobil_M');
         $dt['mobil'] = $mobil->detailmobil($no_plat);
 
         $this->load->view('layout/header');
@@ -122,10 +122,11 @@ class Mobil_C extends Controller
         // Upload gambar baru
         if (isset($_FILES['ft_depan']) && $_FILES['ft_depan']['error'] != UPLOAD_ERR_NO_FILE) {
             $namagambar = $_FILES['ft_depan']['tmp_name'];
-            $ekstensi = explode('.', $_FILES['ft_depan']['name']);
+            $ekstensi = explode(".", $_FILES['ft_depan']['name']);
             $ekstensi = end($ekstensi);
             $ft_depan = $ft_depan . '.' . $ekstensi;
             $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_depan;
+
             if ($ekstensi != "jpg" && $ekstensi != "png" && $ekstensi != "jpeg") {
                 echo "<script>alert('Gagal simpan gambar depan, format jpg, png, dan jpeg..!');</script>";
             } else {
@@ -133,7 +134,46 @@ class Mobil_C extends Controller
             }
         } else {
             $ft_depan = $ft_depan_asli;
-            echo "<script>alert('Tidak ada gambar depan yang dipilih');</script>";
+        }
+
+        // Foto belakang
+        $ft_blkg = 'Belakang' . $this->load->post('no_plat');
+        $ft_blkg_asli = $this->load->post('ft_blkg_asli');
+
+        if (isset($_FILES['ft_blkg']) && $_FILES['ft_blkg']['error'] != UPLOAD_ERR_NO_FILE) {
+            $namagambar = $_FILES['ft_blkg']['tmp_name'];
+            $ekstensi = explode(".", $_FILES['ft_blkg']['name']);
+            $ekstensi = end($ekstensi);
+            $ft_blkg = $ft_blkg . '.' . $ekstensi;
+            $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_blkg;
+
+            if ($ekstensi != "jpg" && $ekstensi != "png" && $ekstensi != "jpeg") {
+                echo "<script>alert('Gagal simpan gambar belakang, format jpg, png, dan jpeg..!');</script>";
+            } else {
+                move_uploaded_file($namagambar, $target_dir);
+            }
+        } else {
+            $ft_blkg = $ft_blkg_asli;
+        }
+
+        // Foto interior
+        $ft_interior = 'Interior' . $this->load->post('no_plat');
+        $ft_interior_asli = $this->load->post('ft_interior_asli');
+
+        if (isset($_FILES['ft_interior']) && $_FILES['ft_interior']['error'] != UPLOAD_ERR_NO_FILE) {
+            $namagambar = $_FILES['ft_interior']['tmp_name'];
+            $ekstensi = explode(".", $_FILES['ft_interior']['name']);
+            $ekstensi = end($ekstensi);
+            $ft_interior = $ft_interior . '.' . $ekstensi;
+            $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_interior;
+
+            if ($ekstensi != "jpg" && $ekstensi != "png" && $ekstensi != "jpeg") {
+                echo "<script>alert('Gagal simpan gambar interior, format jpg, png, dan jpeg..!');</script>";
+            } else {
+                move_uploaded_file($namagambar, $target_dir);
+            }
+        } else {
+            $ft_interior = $ft_interior_asli;
         }
         //end upload gambar baru--------------------------------------------
 
@@ -146,6 +186,8 @@ class Mobil_C extends Controller
             'transmisi'  => $this->load->post('transmisi'),
             'thn_buat'   => $this->load->post('thn_buat'),
             'ft_depan'   => $ft_depan,
+            'ft_blkg'     => $ft_blkg,
+            'ft_interior' => $ft_interior,
             'hrg_hari'   => $this->load->post('hrg_hari'),
             'cttn_unit'  => $this->load->post('cttn_unit'),
             'status_unit'=> $this->load->post('status_unit')
