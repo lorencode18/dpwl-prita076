@@ -32,7 +32,7 @@
                     </h3>
                 </div>
 
-                <form action="<?= base_url('Mobil_C/updateMobil') ?>" method="post"
+                <form action="<?= base_url('Mobil_C/UpdateMobil') ?>" method="post"
                     enctype="multipart/form-data">
 
                     <div class="card-body">
@@ -168,7 +168,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Foto Depan Saat Ini</label><br>
+                                    <label>Foto Depan</label><br>
+
                                     <img src="<?= base_url('img/' . rawurlencode($mobil['ft_depan'])) ?>"
                                          alt="Foto depan mobil"
                                          style="width:200px; height:130px; object-fit:contain;">
@@ -177,6 +178,9 @@
                                            class="form-control mt-2"
                                            accept=".jpg,.jpeg,.png">
 
+                                    <input type="text" name="ft_depan_asli"
+                                           value="<?= $mobil['ft_depan'] ?>" hidden>
+
                                     <small class="text-muted">
                                         Kosongkan jika tidak ingin mengganti foto.
                                     </small>
@@ -185,7 +189,8 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Foto Belakang Saat Ini</label><br>
+                                    <label>Foto Belakang</label><br>
+
                                     <img src="<?= base_url('img/' . rawurlencode($mobil['ft_blkg'])) ?>"
                                          alt="Foto belakang mobil"
                                          style="width:200px; height:130px; object-fit:contain;">
@@ -194,6 +199,9 @@
                                            class="form-control mt-2"
                                            accept=".jpg,.jpeg,.png">
 
+                                    <input type="text" name="ft_blkg_asli"
+                                           value="<?= $mobil['ft_blkg'] ?>" hidden>
+
                                     <small class="text-muted">
                                         Kosongkan jika tidak ingin mengganti foto.
                                     </small>
@@ -202,7 +210,8 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Foto Interior Saat Ini</label><br>
+                                    <label>Foto Interior</label><br>
+
                                     <img src="<?= base_url('img/' . rawurlencode($mobil['ft_interior'])) ?>"
                                          alt="Foto interior mobil"
                                          style="width:200px; height:130px; object-fit:contain;">
@@ -210,6 +219,9 @@
                                     <input type="file" name="ft_interior"
                                            class="form-control mt-2"
                                            accept=".jpg,.jpeg,.png">
+
+                                    <input type="text" name="ft_interior_asli"
+                                           value="<?= $mobil['ft_interior'] ?>" hidden>
 
                                     <small class="text-muted">
                                         Kosongkan jika tidak ingin mengganti foto.
