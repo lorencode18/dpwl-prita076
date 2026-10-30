@@ -32,9 +32,8 @@
                     </h3>
                 </div>
 
-                <form action="<?= base_url('Mobil_C/update') ?>"
-                      method="post"
-                      enctype="multipart/form-data">
+                <form action="<?= base_url('Mobil_C/updateMobil') ?>" method="post"
+                    enctype="multipart/form-data">
 
                     <div class="card-body">
 
