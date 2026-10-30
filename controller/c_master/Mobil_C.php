@@ -113,104 +113,32 @@ class Mobil_C extends Controller
         $this->load->view('layout/footer');
     }
     
-    public function update()
+    public function UpdateMobil()
     {
         $mobil = $this->load->model('m_master/Mobil_M');
-        $no_plat = $this->load->post('no_plat');
-
-        $lama = $mobil->detailmobil($no_plat);
-
-        if (!$lama) {
-            echo "<script>
-                alert('Data mobil tidak ditemukan!');
-                window.location.href = '" . base_url('Mobil_C/index') . "';
-            </script>";
-            exit;
-        }
-
-        $foto = [
-            'ft_depan' => $lama['ft_depan'],
-            'ft_blkg' => $lama['ft_blkg'],
-            'ft_interior' => $lama['ft_interior']
-        ];
-
-        $kolomFoto = [
-            'ft_depan' => 'Depan',
-            'ft_blkg' => 'Belakang',
-            'ft_interior' => 'Interior'
-        ];
-
-        foreach ($kolomFoto as $kolom => $awalan) {
-            if (
-                isset($_FILES[$kolom]) &&
-                $_FILES[$kolom]['error'] === UPLOAD_ERR_OK
-            ) {
-                $ekstensi = strtolower(
-                    pathinfo(
-                        $_FILES[$kolom]['name'],
-                        PATHINFO_EXTENSION
-                    )
-                );
-
-                if (!in_array($ekstensi, ['jpg', 'jpeg', 'png'])) {
-                    echo "<script>
-                        alert('Format foto harus JPG, JPEG, atau PNG!');
-                        window.history.back();
-                    </script>";
-                    exit;
-                }
-
-                $namaFoto = $awalan . $no_plat . '.' . $ekstensi;
-                $target = dirname(__DIR__, 2) . '/img/' . $namaFoto;
-
-                if (move_uploaded_file(
-                    $_FILES[$kolom]['tmp_name'],
-                    $target
-                )) {
-                    $foto[$kolom] = $namaFoto;
-                } else {
-                    echo "<script>
-                        alert('Foto gagal diunggah!');
-                        window.history.back();
-                    </script>";
-                    exit;
-                }
-            } elseif (
-                isset($_FILES[$kolom]) &&
-                $_FILES[$kolom]['error'] !== UPLOAD_ERR_NO_FILE
-            ) {
-                echo "<script>
-                    alert('Terjadi kesalahan saat mengunggah foto!');
-                    window.history.back();
-                </script>";
-                exit;
-            }
-        }
 
         $data = [
-            'no_plat' => $no_plat,
-            'nm_mobil' => $this->load->post('nm_mobil'),
-            'nkursi' => $this->load->post('nkursi'),
-            'nbagasi' => $this->load->post('nbagasi'),
-            'jns_mobil' => $this->load->post('jns_mobil'),
-            'transmisi' => $this->load->post('transmisi'),
-            'thn_buat' => $this->load->post('thn_buat'),
-            'ft_depan' => $foto['ft_depan'],
-            'ft_blkg' => $foto['ft_blkg'],
-            'ft_interior' => $foto['ft_interior'],
-            'hrg_hari' => $this->load->post('hrg_hari'),
-            'cttn_unit' => $this->load->post('cttn_unit'),
-            'status_unit' => $this->load->post('status_unit')
+            'no_plat'    => $this->load->post('no_plat'),
+            'nm_mobil'   => $this->load->post('nm_mobil'),
+            'nkursi'     => $this->load->post('nkursi'),
+            'nbagasi'    => $this->load->post('nbagasi'),
+            'jns_mobil'  => $this->load->post('jns_mobil'),
+            'transmisi'  => $this->load->post('transmisi'),
+            'thn_buat'   => $this->load->post('thn_buat'),
+            'hrg_hari'   => $this->load->post('hrg_hari'),
+            'cttn_unit'  => $this->load->post('cttn_unit'),
+            'status_unit'=> $this->load->post('status_unit')
         ];
 
-        if ($mobil->update($data)) {
-            echo "<script>
-                alert('Data mobil berhasil diperbarui!');
-                window.location.href = '" . base_url('Mobil_C/index') . "';
+        $simpan = $mobil->UbahDtMobil($data);
+
+        if ($simpan) {
+            echo "<script>alert('Data mobil berhasil diubah!');
+            window.location.href = '" . base_url('Mobil_C/index') . "';
             </script>";
         } else {
             echo "<script>
-                alert('Data mobil gagal diperbarui!');
+                alert('Data mobil gagal diubah!');
                 window.history.back();
             </script>";
         }
