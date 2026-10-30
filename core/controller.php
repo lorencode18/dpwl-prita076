@@ -13,7 +13,7 @@ class Controller
             
             public function model($modelName)
             {
-                require_once dirname(__DIR__) . '/model/m_master/' . $modelName . '.php';
+                require_once './model/' . $modelName . '.php';
                 $modelName = basename($modelName);
                 return new $modelName();
             }
