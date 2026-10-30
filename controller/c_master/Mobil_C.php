@@ -117,6 +117,26 @@ class Mobil_C extends Controller
     {
         $mobil = $this->load->model('m_master/Mobil_M');
 
+        $ft_depan = 'Depan' . $this->load->post('no_plat');
+        $ft_depan_asli = $this->load->post('ft_depan_asli');
+        // Upload gambar baru
+        if (isset($_FILES['ft_depan']) && $_FILES['ft_depan']['error'] != UPLOAD_ERR_NO_FILE) {
+            $namagambar = $_FILES['ft_depan']['tmp_name'];
+            $ekstensi = explode('.', $_FILES['ft_depan']['name']);
+            $ekstensi = end($ekstensi);
+            $ft_depan = $ft_depan . '.' . $ekstensi;
+            $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_depan;
+            if ($ekstensi != "jpg" && $ekstensi != "png" && $ekstensi != "jpeg") {
+                echo "<script>alert('Gagal simpan gambar depan, format jpg, png, dan jpeg..!');</script>";
+            } else {
+                move_uploaded_file($namagambar, $target_dir);
+            }
+        } else {
+            $ft_depan = $ft_depan_asli;
+            echo "<script>alert('Tidak ada gambar depan yang dipilih');</script>";
+        }
+        //end upload gambar baru--------------------------------------------
+
         $data = [
             'no_plat'    => $this->load->post('no_plat'),
             'nm_mobil'   => $this->load->post('nm_mobil'),
@@ -125,6 +145,7 @@ class Mobil_C extends Controller
             'jns_mobil'  => $this->load->post('jns_mobil'),
             'transmisi'  => $this->load->post('transmisi'),
             'thn_buat'   => $this->load->post('thn_buat'),
+            'ft_depan'   => $ft_depan,
             'hrg_hari'   => $this->load->post('hrg_hari'),
             'cttn_unit'  => $this->load->post('cttn_unit'),
             'status_unit'=> $this->load->post('status_unit')
