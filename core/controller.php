@@ -10,9 +10,10 @@ class Controller
                 if (!empty($data)) extract($data);
                 include './view/' . $viewName . '.php';
             }
+            
             public function model($modelName)
             {
-                require_once './model/' . $modelName . '.php';
+                require_once dirname(__DIR__) . '/model/m_master/' . $modelName . '.php';
                 $modelName = basename($modelName);
                 return new $modelName();
             }
