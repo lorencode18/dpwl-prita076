@@ -28,15 +28,15 @@ class Penyewa_M076 extends Model
     public function simpan($data)
     {
         $sql = $this->db->prepare("INSERT INTO penyewa (
-            user_plg076, sandi076, nik076, nm_lngkp076,
+            user_plg076, Sandi076, Nik076, nm_lngkp076,
             no_hp076, almt_lngkp076, ft_ktp076, ft_sim_a076
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
         $sql->bind_param(
             "ssssssss",
             $data['user_plg076'],
-            $data['sandi076'],
-            $data['nik076'],
+            $data['Sandi076'],
+            $data['Nik076'],
             $data['nm_lngkp076'],
             $data['no_hp076'],
             $data['almt_lngkp076'],
