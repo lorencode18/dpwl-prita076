@@ -76,15 +76,14 @@
                                             </td>
 
                                             <td>
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-warning btn-sm disabled"
-                                                   style="pointer-events: none;">
+                                                <a href="<?= base_url('Penyewa_C076/edit/' . $p['user_plg076']) ?>"
+                                                   class="btn btn-warning btn-sm">
                                                     Edit
                                                 </a>
 
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-danger btn-sm disabled"
-                                                   style="pointer-events: none;">
+                                                <a href="<?= base_url('Penyewa_C076/hapus/' . $p['user_plg076']) ?>"
+                                                   class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                                     Hapus
                                                 </a>
                                             </td>
