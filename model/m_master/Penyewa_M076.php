@@ -92,4 +92,14 @@ class Penyewa_M076 extends Model
         return $sql->execute();
     }
 
+    public function hapus($user_plg076)
+    {
+        $sql = $this->db->prepare(
+            "DELETE FROM penyewa WHERE user_plg076 = ?"
+        );
+
+        $sql->bind_param("s", $user_plg076);
+
+        return $sql->execute();
+    }
 }
