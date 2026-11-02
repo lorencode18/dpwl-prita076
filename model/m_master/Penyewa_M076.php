@@ -11,4 +11,17 @@ class Penyewa_M076 extends Model
         $dtpenyewa->execute();
         return $dtpenyewa->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-}
+
+    public function cekuser($user_plg)
+    {
+        $sql = $this->db->prepare(
+            "SELECT user_plg076 FROM penyewa WHERE user_plg076 = ?"
+        );
+
+        $sql->bind_param("s", $user_plg);
+        $sql->execute();
+
+        $hasil = $sql->get_result();
+        return $hasil->num_rows > 0;
+    }
+    }
