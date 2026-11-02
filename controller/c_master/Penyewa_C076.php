@@ -25,7 +25,7 @@ class Penyewa_C076 extends Controller
 
     public function simpan()
     {
-        $penyewa = $this->load->model('m_master/Penyewa_M');
+        $penyewa = $this->load->model('m_master/Penyewa_M076');
 
         if ($penyewa->cekuser($this->load->post('user_plg076'))) {
             echo "<script>
@@ -64,8 +64,8 @@ class Penyewa_C076 extends Controller
 
         $data = [
             'user_plg076' => $this->load->post('user_plg076'),
-            'sandi076' => $this->load->post('sandi076'),
-            'nik076' => $this->load->post('nik076'),
+            'Sandi076' => $this->load->post('Sandi076'),
+            'Nik076' => $this->load->post('Nik076'),
             'nm_lngkp076' => $this->load->post('nm_lngkp076'),
             'no_hp076' => $this->load->post('no_hp076'),
             'almt_lngkp076' => $this->load->post('almt_lngkp076'),
