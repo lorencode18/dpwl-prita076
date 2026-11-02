@@ -46,4 +46,19 @@ class Penyewa_M076 extends Model
 
         return $sql->execute();
     }
+
+    public function detailpenyewa($user_plg)
+    {
+        $sql = $this->db->prepare(
+            "SELECT user_plg076, Sandi076, Nik076, nm_lngkp076,
+                    no_hp076, almt_lngkp076, ft_ktp076, ft_sim_a076
+            FROM penyewa
+            WHERE user_plg076 = ?"
+        );
+
+        $sql->bind_param("s", $user_plg);
+        $sql->execute();
+
+        return $sql->get_result()->fetch_assoc();
+    }
 }
