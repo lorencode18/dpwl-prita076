@@ -12,4 +12,14 @@ class Penyewa_C076 extends Controller
         $this->load->view('v_master/penyewaview076', $dt);
         $this->load->view('layout/footer');
     }
+
+    public function create_penyewa()
+    {
+        $info['nm_user'] = explode('@', $this->session->userdata('emailuser'))[0];
+
+        $this->load->view('layout/header');
+        $this->load->view('layout/sidebar', $info);
+        $this->load->view('v_master/create_penyewaview076');
+        $this->load->view('layout/footer');
+    }
 }
