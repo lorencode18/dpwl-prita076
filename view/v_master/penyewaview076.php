@@ -53,24 +53,24 @@
                                     <?php foreach ($dtpenyewa as $p) : ?>
                                         <tr>
                                             <td><?= $p['user_plg076'] ?></td>
-                                            <td><?= $p['nik076'] ?></td>
+                                            <td><?= $p['Nik076'] ?></td>
                                             <td><?= $p['nm_lngkp076'] ?></td>
                                             <td><?= $p['no_hp076'] ?></td>
                                             <td><?= $p['almt_lngkp076'] ?></td>
 
                                             <td>
                                                 <b>KTP:</b><br>
-                                                <a href="<?= base_url('img/' . $p['ft_ktp076']) ?>"
+                                                <a href="<?= base_url('img/' . $p['ft_ktp']) ?>"
                                                    target="_blank">
-                                                    <img src="<?= base_url('img/' . $p['ft_ktp076']) ?>"
+                                                    <img src="<?= base_url('img/' . $p['ft_ktp']) ?>"
                                                          style="width: 60px; height: auto; cursor: pointer;">
                                                 </a>
                                                 <br>
 
                                                 <b>SIM A:</b><br>
-                                                <a href="<?= base_url('img/' . $p['ft_sim_a076']) ?>"
+                                                <a href="<?= base_url('img/' . $p['ft_sim_a']) ?>"
                                                    target="_blank">
-                                                    <img src="<?= base_url('img/' . $p['ft_sim_a076']) ?>"
+                                                    <img src="<?= base_url('img/' . $p['ft_sim_a']) ?>"
                                                          style="width: 60px; height: auto; cursor: pointer;">
                                                 </a>
                                             </td>
