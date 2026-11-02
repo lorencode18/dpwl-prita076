@@ -24,4 +24,26 @@ class Penyewa_M076 extends Model
         $hasil = $sql->get_result();
         return $hasil->num_rows > 0;
     }
+
+    public function simpan($data)
+    {
+        $sql = $this->db->prepare("INSERT INTO penyewa (
+            user_plg076, sandi076, nik076, nm_lngkp076,
+            no_hp076, almt_lngkp076, ft_ktp076, ft_sim_a076
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $sql->bind_param(
+            "ssssssss",
+            $data['user_plg076'],
+            $data['sandi076'],
+            $data['nik076'],
+            $data['nm_lngkp076'],
+            $data['no_hp076'],
+            $data['almt_lngkp076'],
+            $data['ft_ktp076'],
+            $data['ft_sim_a076']
+        );
+
+        return $sql->execute();
     }
+}
