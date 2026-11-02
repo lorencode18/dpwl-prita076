@@ -114,7 +114,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Foto KTP (ft_ktp)</label>
-                                    <input type="file" name="ft_ktp"
+                                    <input type="file" name="ft_ktp076"
                                            class="form-control"
                                            accept=".jpg,.jpeg,.png"
                                            required>
@@ -127,7 +127,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Foto SIM A (ft_sim_a)</label>
-                                    <input type="file" name="ft_sim_a"
+                                    <input type="file" name="ft_sim_a076"
                                            class="form-control"
                                            accept=".jpg,.jpeg,.png"
                                            required>
