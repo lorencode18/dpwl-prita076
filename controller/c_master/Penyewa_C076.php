@@ -173,4 +173,21 @@ class Penyewa_C076 extends Controller
         }
     }
 
+    public function hapus($user_plg076)
+    {
+        $penyewa = $this->load->model('m_master/Penyewa_M076');
+
+        if ($penyewa->hapus($user_plg076)) {
+            echo "<script>
+                alert('Data penyewa berhasil dihapus!');
+                window.location.href = '" . base_url('Penyewa_C076/index') . "';
+            </script>";
+        } else {
+            echo "<script>
+                alert('Data penyewa gagal dihapus!');
+                window.location.href = '" . base_url('Penyewa_C076/index') . "';
+            </script>";
+        }
+    }
+
 }
