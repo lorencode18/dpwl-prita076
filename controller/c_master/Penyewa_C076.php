@@ -22,4 +22,70 @@ class Penyewa_C076 extends Controller
         $this->load->view('v_master/create_penyewaview076');
         $this->load->view('layout/footer');
     }
+
+    public function simpan()
+    {
+        $penyewa = $this->load->model('m_master/Penyewa_M');
+
+        if ($penyewa->cekuser($this->load->post('user_plg076'))) {
+            echo "<script>
+                alert('Username sudah terdaftar!');
+                window.history.back();
+                </script>";
+            exit;
+        }
+
+        $ft_ktp = 'KTP' . $this->load->post('user_plg076');
+        $ft_sim_a = 'SIM' . $this->load->post('user_plg076');
+
+        $nmgambar = $_FILES['ft_ktp']['tmp_name'];
+        $ekstensi = explode(".", $_FILES['ft_ktp']['name']);
+        $ekstensi = end($ekstensi);
+        $ft_ktp = $ft_ktp . '.' . $ekstensi;
+        $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_ktp;
+
+        if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
+            echo "<script>alert('Gagal simpan gambar KTP, format jpg, png dan jpeg...');</script>";
+        } else {
+            move_uploaded_file($nmgambar, $target_dir);
+        }
+
+        $nmgambar = $_FILES['ft_sim_a']['tmp_name'];
+        $ekstensi = explode(".", $_FILES['ft_sim_a']['name']);
+        $ekstensi = end($ekstensi);
+        $ft_sim_a = $ft_sim_a . '.' . $ekstensi;
+        $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_sim_a;
+
+        if ($ekstensi != 'jpg' && $ekstensi != 'png' && $ekstensi != 'jpeg') {
+            echo "<script>alert('Gagal simpan gambar SIM A, format jpg, png dan jpeg...');</script>";
+        } else {
+            move_uploaded_file($nmgambar, $target_dir);
+        }
+
+        $data = [
+            'user_plg076' => $this->load->post('user_plg076'),
+            'sandi076' => $this->load->post('Sandi076'),
+            'nik076' => $this->load->post('Nik076'),
+            'nm_lngkp076' => $this->load->post('nm_lngkp076'),
+            'no_hp076' => $this->load->post('no_hp076'),
+            'almt_lngkp076' => $this->load->post('almt_lngkp076'),
+            'ft_ktp' => $ft_ktp,
+            'ft_sim_a' => $ft_sim_a
+        ];
+
+        $simpan = $penyewa->simpan($data);
+
+        if ($simpan) {
+            echo "<script>
+                alert('Data penyewa berhasil disimpan!');
+                window.location.href = '" . base_url('Penyewa_C076/index') . "';
+            </script>";
+        } else {
+            echo "<script>
+                alert('Data penyewa gagal disimpan!');
+                window.history.back();
+            </script>";
+        }
+    }
+
 }
