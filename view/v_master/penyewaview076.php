@@ -60,17 +60,17 @@
 
                                             <td>
                                                 <b>KTP:</b><br>
-                                                <a href="<?= base_url('img/' . $p['ft_ktp']) ?>"
+                                                <a href="<?= base_url('img/' . $p['ft_ktp076']) ?>"
                                                    target="_blank">
-                                                    <img src="<?= base_url('img/' . $p['ft_ktp']) ?>"
+                                                    <img src="<?= base_url('img/' . $p['ft_ktp076']) ?>"
                                                          style="width: 60px; height: auto; cursor: pointer;">
                                                 </a>
                                                 <br>
 
                                                 <b>SIM A:</b><br>
-                                                <a href="<?= base_url('img/' . $p['ft_sim_a']) ?>"
+                                                <a href="<?= base_url('img/' . $p['ft_sim_a076']) ?>"
                                                    target="_blank">
-                                                    <img src="<?= base_url('img/' . $p['ft_sim_a']) ?>"
+                                                    <img src="<?= base_url('img/' . $p['ft_sim_a076']) ?>"
                                                          style="width: 60px; height: auto; cursor: pointer;">
                                                 </a>
                                             </td>
