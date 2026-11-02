@@ -92,7 +92,7 @@ class Penyewa_C076 extends Controller
     {
         $info['nm_user076'] = explode('@', $this->session->userdata('emailuser'))[0];
         $penyewa = $this->load->model('m_master/Penyewa_M076');
-        $dt['penyewa'] = $penyewa->detailpenyewa($user_plg);
+        $dt['p'] = $penyewa->detailpenyewa($user_plg);
 
         $this->load->view('layout/header');
         $this->load->view('layout/sidebar', $info);
@@ -100,7 +100,6 @@ class Penyewa_C076 extends Controller
         $this->load->view('layout/footer');
     }
 
-    
     public function UpdatePenyewa()
     {
         $penyewa = $this->load->model('m_master/Penyewa_M076');
