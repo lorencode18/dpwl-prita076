@@ -99,4 +99,78 @@ class Penyewa_C076 extends Controller
         $this->load->view('v_master/update_penyewaview076', $dt);
         $this->load->view('layout/footer');
     }
+
+    
+    public function UpdatePenyewa()
+    {
+        $penyewa = $this->load->model('m_master/Penyewa_M076');
+
+        $ft_ktp076 = 'KTP' . $this->load->post('user_plg076');
+        $ft_ktp_asli076 = $this->load->post('ft_ktp_asli076');
+
+        // Upload gambar baru
+        if (isset($_FILES['ft_ktp076']) && $_FILES['ft_ktp076']['error'] != UPLOAD_ERR_NO_FILE) {
+            $namagambar = $_FILES['ft_ktp076']['tmp_name'];
+            $ekstensi = explode(".", $_FILES['ft_ktp076']['name']);
+            $ekstensi = end($ekstensi);
+            $ft_ktp076 = $ft_ktp076 . '.' . $ekstensi;
+            $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_ktp076;
+
+            if ($ekstensi != "jpg" && $ekstensi != "png" && $ekstensi != "jpeg") {
+                echo "<script>alert('Gagal simpan gambar KTP, format jpg, png, dan jpeg..!');</script>";
+            } else {
+                move_uploaded_file($namagambar, $target_dir);
+            }
+        } else {
+            $ft_ktp076 = $ft_ktp_asli076;
+        }
+
+        // Foto SIM A
+        $ft_sim_a076 = 'SIM' . $this->load->post('user_plg076');
+        $ft_sim_a_asli076 = $this->load->post('ft_sim_a_asli076');
+
+        if (isset($_FILES['ft_sim_a076']) && $_FILES['ft_sim_a076']['error'] != UPLOAD_ERR_NO_FILE) {
+            $namagambar = $_FILES['ft_sim_a076']['tmp_name'];
+            $ekstensi = explode(".", $_FILES['ft_sim_a076']['name']);
+            $ekstensi = end($ekstensi);
+            $ft_sim_a076 = $ft_sim_a076 . '.' . $ekstensi;
+            $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_sim_a076;
+
+            if ($ekstensi != "jpg" && $ekstensi != "png" && $ekstensi != "jpeg") {
+                echo "<script>alert('Gagal simpan gambar SIM A, format jpg, png, dan jpeg..!');</script>";
+            } else {
+                move_uploaded_file($namagambar, $target_dir);
+            }
+        } else {
+            $ft_sim_a076 = $ft_sim_a_asli076;
+        }
+
+        // End upload gambar baru
+
+        $data = [
+            'user_plg076' => $this->load->post('user_plg076'),
+            'sandi076' => $this->load->post('sandi076'),
+            'Nik076' => $this->load->post('Nik076'),
+            'nm_lngkp076' => $this->load->post('nm_lngkp076'),
+            'no_hp076' => $this->load->post('no_hp076'),
+            'almt_lngkp076' => $this->load->post('almt_lngkp076'),
+            'ft_ktp076' => $ft_ktp076,
+            'ft_sim_a076' => $ft_sim_a076
+        ];
+
+        $simpan = $penyewa->UbahDtPenyewa($data);
+
+        if ($simpan) {
+            echo "<script>
+                alert('Data penyewa berhasil diubah!');
+                window.location.href = '" . base_url('Penyewa_C076/index') . "';
+                </script>";
+        } else {
+            echo "<script>
+                alert('Data penyewa gagal diubah!');
+                window.history.back();
+                </script>";
+        }
+    }
+
 }
