@@ -38,8 +38,8 @@ class Penyewa_C076 extends Controller
         $ft_ktp = 'KTP' . $this->load->post('user_plg076');
         $ft_sim_a = 'SIM' . $this->load->post('user_plg076');
 
-        $nmgambar = $_FILES['ft_ktp']['tmp_name'];
-        $ekstensi = explode(".", $_FILES['ft_ktp']['name']);
+        $nmgambar = $_FILES['ft_ktp076']['tmp_name'];
+        $ekstensi = explode(".", $_FILES['ft_ktp076']['name']);
         $ekstensi = end($ekstensi);
         $ft_ktp = $ft_ktp . '.' . $ekstensi;
         $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_ktp;
@@ -50,8 +50,8 @@ class Penyewa_C076 extends Controller
             move_uploaded_file($nmgambar, $target_dir);
         }
 
-        $nmgambar = $_FILES['ft_sim_a']['tmp_name'];
-        $ekstensi = explode(".", $_FILES['ft_sim_a']['name']);
+        $nmgambar = $_FILES['ft_sim_a076']['tmp_name'];
+        $ekstensi = explode(".", $_FILES['ft_sim_a076']['name']);
         $ekstensi = end($ekstensi);
         $ft_sim_a = $ft_sim_a . '.' . $ekstensi;
         $target_dir = dirname(__DIR__, 2) . '/img/' . $ft_sim_a;
@@ -64,13 +64,13 @@ class Penyewa_C076 extends Controller
 
         $data = [
             'user_plg076' => $this->load->post('user_plg076'),
-            'sandi076' => $this->load->post('Sandi076'),
-            'nik076' => $this->load->post('Nik076'),
+            'sandi076' => $this->load->post('sandi076'),
+            'nik076' => $this->load->post('nik076'),
             'nm_lngkp076' => $this->load->post('nm_lngkp076'),
             'no_hp076' => $this->load->post('no_hp076'),
             'almt_lngkp076' => $this->load->post('almt_lngkp076'),
-            'ft_ktp' => $ft_ktp,
-            'ft_sim_a' => $ft_sim_a
+            'ft_ktp076' => $ft_ktp,
+            'ft_sim_a076' => $ft_sim_a
         ];
 
         $simpan = $penyewa->simpan($data);
