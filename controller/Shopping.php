@@ -1,5 +1,5 @@
 <?php
-class Shopping extends Controlller
+class Shopping extends Controller
 {
     public function index()
     {
