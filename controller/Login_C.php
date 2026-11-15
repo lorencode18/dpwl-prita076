@@ -50,9 +50,9 @@ class Login_C extends Controller
     public function keluar()
     {
         $this->session->unset_userdata('userplg');
-        $this->session->unset_userdata('Emaillg');
+        $this->session->unset_userdata('EmaiPlg');
         $this->session->unset_userdata('NmPlg');
-        $this->session->set_userdata('pesan', 'Berhasil Logout');
+        $this->session->set_flashdata('pesan', 'Berhasil Logout');
         redirect('Shopping/index');
         exit;
     }
