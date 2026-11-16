@@ -25,19 +25,28 @@ class Sewa_C extends Controller
         ];
         $hasil = $sewa->simpan($data_sewa);
 
+        //Data detail
+        $hrgmobil = $this->load->model('m_master/Mobil_M');
+        $smbilhrg = $hrgmobil->detailmobil($no_plat);
+        $data_pilih = [
+            'kode_sewa' => $kode,
+            'no_plat' => $no_plat,
+            'hrg_sewa' => $smbilhrg['hrg_hari'],
+            'n_hari' => 0
+        ];
+        $dtpilih = $sewa->simpandetail($data_pilih);
 
-
-        if ($hasil !== false) {
+        if ($hasil !== false or $dtpilih !== false) {
             echo "<script>
-        alert('Mobil berhasil dimasukkan ke keranjang!');
-        window.location.href = '" . base_url('shopping') . "';
-    </script>";
+                alert('Mobil berhasil dimasukkan ke keranjang! Kode Sewa: " . $hasil . "');
+                window.location.href = '" . base_url('shopping') . "';
+            </script>";
             exit;
         } else {
             echo "<script>
-        alert('Gagal menyimpan data penyewaan!');
-        window.history.back();
-    </script>";
+            alert('Gagal menyimpan data penyewaan!');
+            window.history.back();
+        </script>";
             exit;
         }
     }
