@@ -14,17 +14,19 @@ class Sewa_C extends Controller
         }
 
         $sewa = $this->load->model('m_shop/Sewa_M');
-        $kode = $sewa->buat_kode_sewa();
+        $kode = $sewa->Cektransaksi($email);
+        if (!$kode) {
+            $kode = $sewa->buat_kode_sewa();
         // HEADER: Tabel sewa
-        $data_sewa = [
-            'kode_sewa'   => $kode,
-            'tgl_mulai'   => date('Y-m-d'),
-            'tgl_selesai' => date('Y-m-d'),
-            'status_sewa' => 'Keranjang',
-            'user_plg'    => $email
-        ];
-        $hasil = $sewa->simpan($data_sewa);
-
+            $data_sewa = [
+                'kode_sewa'   => $kode,
+                'tgl_mulai'   => date('Y-m-d'),
+                'tgl_selesai' => date('Y-m-d'),
+                'status_sewa' => 'Keranjang',
+                'user_plg'    => $email
+            ];
+            $hasil = $sewa->simpan($data_sewa);
+        }
         //Data detail
         $hrgmobil = $this->load->model('m_master/Mobil_M');
         $smbilhrg = $hrgmobil->detailmobil($no_plat);
