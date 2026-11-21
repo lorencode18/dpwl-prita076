@@ -78,7 +78,7 @@ class Sewa_M extends Model
     public function cekDataPilih($kode, $no_plat)
     {
         $sql = $this->db->prepare(
-            "SELECT * FROM pilihan WHERE kode_sewa=? and no_plat=?"
+            "SELECT * FROM pilih WHERE kode_sewa=? and no_plat=?"
         );
         $sql->bind_param("ss", $kode, $no_plat);
         $sql->execute();

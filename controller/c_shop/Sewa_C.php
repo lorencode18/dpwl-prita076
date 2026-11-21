@@ -29,7 +29,7 @@ class Sewa_C extends Controller
         }
 
         //Cek keberadaan data mobil
-        $cekdata = $sewa->cekDataPilih($kode, $no_plat);
+        $cekdata = $sewa->CekDataPilih($kode, $no_plat);
         if (!$cekdata) {
         //Data detail
             $hrgmobil = $this->load->model('m_master/Mobil_M');
